@@ -2,7 +2,7 @@ Summary:	kmud - KDE mud client
 Summary(pl):	kmud - klient muda dla KDE
 Name:		kmud2
 Version:	snapshot
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Games
 Source0:	ftp://ftp.kmud.de/pub/kmud/%{name}-%{version}.tar.gz
@@ -12,6 +12,7 @@ Source1:        http://ep09.pld-linux.org/~djurban/kde/kde-common-admin.tar.bz2
 Patch1:		%{name}-makefile-fix.patch
 Patch2:		%{name}-const.patch
 Patch3:		%{name}-docbook_entity_package.patch
+Patch4:		%{name}-desktop.patch
 URL:		http://www.kmud.de/
 BuildRequires:	pcre-devel
 BuildRequires:	xrender-devel
@@ -69,6 +70,7 @@ tar xfj %{SOURCE1}
 %patch1 -p0
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 cp -f /usr/share/automake/config.sub admin
@@ -95,8 +97,6 @@ mv -f $RPM_BUILD_ROOT{%{_datadir}/applnk/Games/*.desktop,%{_desktopdir}}
 
 %find_lang kmud --with-kde
 
-echo "Categories=Qt;KDE;Game;RolePlaying;" >> $RPM_BUILD_ROOT%{_desktopdir}/kmud.desktop
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -111,7 +111,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde3/*.so
 %{_libdir}/kde3/*.la
 %{_datadir}/apps/*
-%{_iconsdir}/*/*/*/*.png
+%{_iconsdir}/hicolor/*/*/*.png
+#%{_iconsdir}/locolor/*/*/*.png
 %{_iconsdir}/kmud
 %{_datadir}/services/*
 %{_datadir}/servicetypes/*
