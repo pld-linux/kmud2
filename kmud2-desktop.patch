@@ -1,0 +1,22 @@
+--- kmud2/kmud/kmud.desktop~	2004-10-09 15:35:39.000000000 +0200
++++ kmud2/kmud/kmud.desktop	2004-10-09 15:35:39.000000000 +0200
+@@ -1,14 +1,15 @@
+ # KDE Config File  
+ [Desktop Entry]
++Encoding=UTF-8
+ Type=Application
+ Exec=kmud -caption "%c" %i %m  
+ Icon=kmud.png
+ MiniIcon=kmud.png
+ DocPath=kmud/index.html
+-Comment=
+-Comment[de]=
+-Terminal=0
++Comment=KDE mud client
++Comment[pl]=Klient muda dla KDE
++Terminal=false
+ Name=Kmud
+ Name[de]=Kmud
+-
++Categories=Qt;KDE;Game;RolePlaying;
+ X-KDE-StartupNotify=true
