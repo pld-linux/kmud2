@@ -14,13 +14,11 @@ Patch2:		%{name}-const.patch
 Patch3:		%{name}-docbook_entity_package.patch
 Patch4:		%{name}-desktop.patch
 URL:		http://www.kmud.de/
-BuildRequires:	pcre-devel
-BuildRequires:	xrender-devel
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	kdelibs-devel >= 9:3.2.0
+BuildRequires:	unsermake >= 040805
 BuildRequires:	zlib-devel
-BuildRequires:  autoconf
-BuildRequires:  automake
-BuildRequires:  kdelibs-devel >= 9:3.2.0
-BuildRequires:  unsermake >= 040805
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -55,7 +53,7 @@ interfejs wtyczek.
 Summary:	kmud - development files
 Summary(pl):	Pliki programistyczne dla kmuda
 Group:		X11/Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 kmud development files.
@@ -110,7 +108,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libkmud.so.*.*.*
 %attr(755,root,root) %{_libdir}/kde3/*.so
 %{_libdir}/kde3/*.la
-%{_datadir}/apps/*
+%{_datadir}/apps/kmud
+%{_datadir}/apps/kmudmapper
 %{_iconsdir}/hicolor/*/*/*.png
 #%{_iconsdir}/locolor/*/*/*.png
 %{_iconsdir}/kmud
