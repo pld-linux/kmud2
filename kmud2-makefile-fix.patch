@@ -1,0 +1,11 @@
+--- kmud/Makefile.am	Tue Mar 25 01:10:06 2003
++++ kmud/Makefile.amm	Sat Nov 15 20:13:19 2003
+@@ -34,7 +34,7 @@
+ 	caliasfilter.cpp
+ 
+ 
+-EXTRA_DIST = \	
++EXTRA_DIST = \
+ 	kmudapplication.h \
+ 	kmudmainwindow.h \
+ 	kmudcore.h \
