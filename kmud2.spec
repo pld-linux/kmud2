@@ -11,6 +11,15 @@ Source1:	ftp://ftp.kmud.de/pub/kmud/kde3-admin.tar.gz
 # Source1-md5:	13ede60fe87178ec08864e32431eda9e
 Patch0:		%{name}-automake-fix.patch
 Patch1:		%{name}-makefile-fix.patch
+Patch2:		%{name}-const.patch
+Patch3:		%{name}-docbook_entity_package.patch
+BuildRequires:	zlib-devel
+BuildRequires:	libjpeg-devel
+BuildRequires:	qt-devel >= 3.0.3
+BuildRequires:	kdelibs-devel
+BuildRequires:	artsc-devel
+BuildRequires:	xrender-devel
+BuildRequires:	pcre-devel
 URL:		http://www.kmud.de
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -42,6 +51,17 @@ liniê wpisywania komend oraz wieloliniowe wpisywanie, logowanie,
 auto-login/reconnect, programowalny pasek przycisków, MCCP oraz
 interfejs wtyczek.
 
+%package devel
+Summary:	kmud - development files
+Summary(pl):	pliki developerskie dla kmud
+Group:		X11/Development/Libraries
+Requires:	%{name} = %{version}
+
+%description devel
+Development files.
+
+%description devel -l pl
+Pliki developerskie dla kmud.
 
 %prep
 
@@ -50,6 +70,8 @@ rm -rf admin
 tar xfz %{SOURCE1}
 %patch0 -p0
 %patch1 -p0
+%patch2 -p1
+%patch3 -p1
 
 %build
 
@@ -59,16 +81,34 @@ tar xfz %{SOURCE1}
 
 
 %install
-#rm -rf $RPM_BUILD_ROOT
-#%{__make} install \
-#	DESTDIR=$RPM_BUILD_ROOT
-
 rm -rf $RPM_BUILD_ROOT
-%clean
-#rm -rf $RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT \
+	kde_htmldir=%{_kdedocdir}
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
-%doc README FAQ ChangeLog TODO
+%doc README ChangeLog TODO
 %attr(755,root,root) %{_bindir}/*
+%{_libdir}/libkmud.so.*.*.*
+%{_libdir}/kde3/*
+%{_datadir}/apps/*
+%{_datadir}/icons/hicolor/*/*
+%{_datadir}/icons/kmud
+%{_datadir}/services
+%{_datadir}/servicetypes
+# TODO: Why _applnkdir points to /usr/X11R6 ???
+%{_datadir}/applnk/Games/*
+%lang(en) %{_kdedocdir}/en/kmud
+
+%files devel
+%defattr(644,root,root,755)
+%{_includedir}/kmud
+%{_libdir}/libkmud.so
+%{_libdir}/libkmud.la
