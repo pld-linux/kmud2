@@ -7,20 +7,19 @@ License:	GPL
 Group:		X11/Applications/Games
 Source0:	ftp://ftp.kmud.de/pub/kmud/%{name}-%{version}.tar.gz
 # Source0-md5:	11274fdd0a6685ef7df4449610131019
-Source1:	ftp://ftp.kmud.de/pub/kmud/kde3-admin.tar.gz
-# Source1-md5:	13ede60fe87178ec08864e32431eda9e
-Patch0:		%{name}-automake-fix.patch
+Source1:        http://ep09.pld-linux.org/~djurban/kde/kde-common-admin.tar.bz2
+# Source1-md5:  81e0b2f79ef76218381270960ac0f55f
 Patch1:		%{name}-makefile-fix.patch
 Patch2:		%{name}-const.patch
 Patch3:		%{name}-docbook_entity_package.patch
 URL:		http://www.kmud.de/
-BuildRequires:	artsc-devel
-BuildRequires:	kdelibs-devel
-BuildRequires:	libjpeg-devel
 BuildRequires:	pcre-devel
-BuildRequires:	qt-devel >= 3.0.3
 BuildRequires:	xrender-devel
 BuildRequires:	zlib-devel
+BuildRequires:  autoconf
+BuildRequires:  automake
+BuildRequires:  kdelibs-devel >= 9:3.2.0
+BuildRequires:  unsermake >= 040805
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -66,15 +65,20 @@ Pliki programistyczne dla kmuda.
 %prep
 %setup -q -n kmud2
 rm -rf admin
-tar xfz %{SOURCE1}
-%patch0 -p0
+tar xfj %{SOURCE1}
 %patch1 -p0
 %patch2 -p1
 %patch3 -p1
 
 %build
-%{__make} -f Makefile.dist
-%configure
+cp -f /usr/share/automake/config.sub admin
+# Stupid fellows defined the 'all' target in Makefile.am...
+#export UNSERMAKE=/usr/share/unsermake/unsermake
+%{__make} -f admin/Makefile.common cvs
+
+%configure \
+	--with-qt-libraries=%{_libdir}
+
 %{__make}
 
 %install
@@ -82,13 +86,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	kde_htmldir=%{_kdedocdir}
+	kde_htmldir=%{_kdedocdir} \
+	kde_libs_htmldir=%{_kdedocdir}
 
 # TODO: add Categories (if not present already)
 install -d $RPM_BUILD_ROOT%{_desktopdir}
 mv -f $RPM_BUILD_ROOT{%{_datadir}/applnk/Games/*.desktop,%{_desktopdir}}
 
 %find_lang kmud --with-kde
+
+echo "Categories=Qt;KDE;Game;RolePlaying;" >> $RPM_BUILD_ROOT%{_desktopdir}/kmud.desktop
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -104,7 +111,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/kde3/*.so
 %{_libdir}/kde3/*.la
 %{_datadir}/apps/*
-%{_iconsdir}/hicolor/*/*/*.png
+%{_iconsdir}/*/*/*/*.png
 %{_iconsdir}/kmud
 %{_datadir}/services/*
 %{_datadir}/servicetypes/*
