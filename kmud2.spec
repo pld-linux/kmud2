@@ -34,7 +34,7 @@ dla wszystkich ludzi, którzy chc± posiadaæ ³adny, graficzny interfejs
 zamiast prostego telneta do grania w mudy. Program ten posiada
 'czarodziei' automatycznej i prostej konfiguracji po³±czeñ oraz
 profili. Do tego: automapper, aliasy, triggery (tak¿e kolorowe - do
-pod¶wietlania tekstów), historiê komend (wraz z inteligetn±
+pod¶wietlania tekstów), historiê komend (wraz z inteligentn±
 przegl±dark±), dzielenie ekranu w oknie przegl±dania historii,
 chodzenie przy pomocy klawiatury numerycznej, szybkie chodzenie,
 wsparcie dla ANSII/vt100 z obs³uga ustawieñ kolorów, alternatywn±
