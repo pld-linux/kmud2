@@ -2,7 +2,7 @@ Summary:	kmud - KDE mud client
 Summary(pl):	kmud - klient muda dla KDE
 Name:		kmud2
 Version:	snapshot
-Release:	0.1
+Release:	1
 License:	GPL
 Group:		X11/Applications/Games
 Source0:	ftp://ftp.kmud.de/pub/kmud/%{name}-%{version}.tar.gz
