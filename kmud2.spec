@@ -8,7 +8,7 @@ Group:		X11/Applications/Games
 Source0:	ftp://ftp.kmud.de/pub/kmud/%{name}-%{version}.tar.gz
 # Source0-md5:	11274fdd0a6685ef7df4449610131019
 Source1:        http://ep09.pld-linux.org/~djurban/kde/kde-common-admin.tar.bz2
-# Source1-md5:  81e0b2f79ef76218381270960ac0f55f
+# Source1-md5:	81e0b2f79ef76218381270960ac0f55f
 Patch1:		%{name}-makefile-fix.patch
 Patch2:		%{name}-const.patch
 Patch3:		%{name}-docbook_entity_package.patch
