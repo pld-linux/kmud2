@@ -1,5 +1,5 @@
 Summary:	kmud - KDE mud client
-Summary(pl):	kmud - mud client dla KDE
+Summary(pl):	kmud - klient muda dla KDE
 Name:		kmud2
 Version:	snapshot
 Release:	0.1
@@ -13,14 +13,14 @@ Patch0:		%{name}-automake-fix.patch
 Patch1:		%{name}-makefile-fix.patch
 Patch2:		%{name}-const.patch
 Patch3:		%{name}-docbook_entity_package.patch
-BuildRequires:	zlib-devel
-BuildRequires:	libjpeg-devel
-BuildRequires:	qt-devel >= 3.0.3
-BuildRequires:	kdelibs-devel
+URL:		http://www.kmud.de/
 BuildRequires:	artsc-devel
-BuildRequires:	xrender-devel
+BuildRequires:	kdelibs-devel
+BuildRequires:	libjpeg-devel
 BuildRequires:	pcre-devel
-URL:		http://www.kmud.de
+BuildRequires:	qt-devel >= 3.0.3
+BuildRequires:	xrender-devel
+BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -37,8 +37,8 @@ MCCP (mud client compression protocol) support, and a plugin
 interface.
 
 %description -l pl
-Kmud jest graficznym klientem mudowym dla Linuksa i innych paltfrom
-Uniksowych u¿ywaj±cych KDE. Jest to prosty i ³atwy w obs³udze program
+Kmud jest graficznym klientem mudowym dla Linuksa i innych platform
+uniksowych u¿ywaj±cych KDE. Jest to prosty i ³atwy w obs³udze program
 dla wszystkich ludzi, którzy chc± posiadaæ ³adny, graficzny interfejs
 zamiast prostego telneta do grania w mudy. Program ten posiada
 'czarodziei' automatycznej i prostej konfiguracji po³±czeñ oraz
@@ -46,25 +46,24 @@ profili. Do tego: automapper, aliasy, triggery (tak¿e kolorowe - do
 pod¶wietlania tekstów), historiê komend (wraz z inteligentn±
 przegl±dark±), dzielenie ekranu w oknie przegl±dania historii,
 chodzenie przy pomocy klawiatury numerycznej, szybkie chodzenie,
-wsparcie dla ANSII/vt100 z obs³uga ustawieñ kolorów, alternatywn±
-liniê wpisywania komend oraz wieloliniowe wpisywanie, logowanie,
+wsparcie dla ANSI/vt100 z obs³uga ustawieñ kolorów, alternatywn± liniê
+wpisywania komend oraz wieloliniowe wpisywanie, logowanie,
 auto-login/reconnect, programowalny pasek przycisków, MCCP oraz
 interfejs wtyczek.
 
 %package devel
 Summary:	kmud - development files
-Summary(pl):	pliki developerskie dla kmud
+Summary(pl):	Pliki programistyczne dla kmuda
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}
 
 %description devel
-Development files.
+kmud development files.
 
 %description devel -l pl
-Pliki developerskie dla kmud.
+Pliki programistyczne dla kmuda.
 
 %prep
-
 %setup -q -n kmud2
 rm -rf admin
 tar xfz %{SOURCE1}
@@ -74,17 +73,22 @@ tar xfz %{SOURCE1}
 %patch3 -p1
 
 %build
-
 %{__make} -f Makefile.dist
 %configure
 %{__make}
 
-
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	kde_htmldir=%{_kdedocdir}
+
+# TODO: add Categories (if not present already)
+install -d $RPM_BUILD_ROOT%{_desktopdir}
+mv -f $RPM_BUILD_ROOT{%{_datadir}/applnk/Games/*.desktop,%{_desktopdir}}
+
+%find_lang kmud --with-kde
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -92,23 +96,22 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
-%files
+%files -f kmud.lang
 %defattr(644,root,root,755)
 %doc README ChangeLog TODO
 %attr(755,root,root) %{_bindir}/*
-%{_libdir}/libkmud.so.*.*.*
-%{_libdir}/kde3/*
+%attr(755,root,root) %{_libdir}/libkmud.so.*.*.*
+%attr(755,root,root) %{_libdir}/kde3/*.so
+%{_libdir}/kde3/*.la
 %{_datadir}/apps/*
-%{_datadir}/icons/hicolor/*/*
-%{_datadir}/icons/kmud
-%{_datadir}/services
-%{_datadir}/servicetypes
-# TODO: Why _applnkdir points to /usr/X11R6 ???
-%{_datadir}/applnk/Games/*
-%lang(en) %{_kdedocdir}/en/kmud
+%{_iconsdir}/hicolor/*/*/*.png
+%{_iconsdir}/kmud
+%{_datadir}/services/*
+%{_datadir}/servicetypes/*
+%{_desktopdir}/*.desktop
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/kmud
-%{_libdir}/libkmud.so
+%attr(755,root,root) %{_libdir}/libkmud.so
 %{_libdir}/libkmud.la
+%{_includedir}/kmud
