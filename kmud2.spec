@@ -1,5 +1,5 @@
 Summary:	kmud - KDE mud client
-Summary(pl):	kmud - klient muda dla KDE
+Summary(pl.UTF-8):   kmud - klient muda dla KDE
 Name:		kmud2
 Version:	snapshot
 Release:	2
@@ -35,31 +35,31 @@ logging facility, auto login/auto reconnect, a programmable toolbar,
 MCCP (mud client compression protocol) support, and a plugin
 interface.
 
-%description -l pl
+%description -l pl.UTF-8
 Kmud jest graficznym klientem mudowym dla Linuksa i innych platform
-uniksowych u¿ywaj±cych KDE. Jest to prosty i ³atwy w obs³udze program
-dla wszystkich ludzi, którzy chc± posiadaæ ³adny, graficzny interfejs
+uniksowych uÅ¼ywajÄ…cych KDE. Jest to prosty i Å‚atwy w obsÅ‚udze program
+dla wszystkich ludzi, ktÃ³rzy chcÄ… posiadaÄ‡ Å‚adny, graficzny interfejs
 zamiast prostego telneta do grania w mudy. Program ten posiada
-'czarodziei' automatycznej i prostej konfiguracji po³±czeñ oraz
-profili. Do tego: automapper, aliasy, triggery (tak¿e kolorowe - do
-pod¶wietlania tekstów), historiê komend (wraz z inteligentn±
-przegl±dark±), dzielenie ekranu w oknie przegl±dania historii,
+'czarodziei' automatycznej i prostej konfiguracji poÅ‚Ä…czeÅ„ oraz
+profili. Do tego: automapper, aliasy, triggery (takÅ¼e kolorowe - do
+podÅ›wietlania tekstÃ³w), historiÄ™ komend (wraz z inteligentnÄ…
+przeglÄ…darkÄ…), dzielenie ekranu w oknie przeglÄ…dania historii,
 chodzenie przy pomocy klawiatury numerycznej, szybkie chodzenie,
-wsparcie dla ANSI/vt100 z obs³uga ustawieñ kolorów, alternatywn± liniê
+wsparcie dla ANSI/vt100 z obsÅ‚uga ustawieÅ„ kolorÃ³w, alternatywnÄ… liniÄ™
 wpisywania komend oraz wieloliniowe wpisywanie, logowanie,
-auto-login/reconnect, programowalny pasek przycisków, MCCP oraz
+auto-login/reconnect, programowalny pasek przyciskÃ³w, MCCP oraz
 interfejs wtyczek.
 
 %package devel
 Summary:	kmud - development files
-Summary(pl):	Pliki programistyczne dla kmuda
+Summary(pl.UTF-8):   Pliki programistyczne dla kmuda
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 kmud development files.
 
-%description devel -l pl
+%description devel -l pl.UTF-8
 Pliki programistyczne dla kmuda.
 
 %prep
