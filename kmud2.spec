@@ -1,5 +1,5 @@
 Summary:	kmud - KDE mud client
-Summary(pl.UTF-8):   kmud - klient muda dla KDE
+Summary(pl.UTF-8):	kmud - klient muda dla KDE
 Name:		kmud2
 Version:	snapshot
 Release:	2
@@ -52,7 +52,7 @@ interfejs wtyczek.
 
 %package devel
 Summary:	kmud - development files
-Summary(pl.UTF-8):   Pliki programistyczne dla kmuda
+Summary(pl.UTF-8):	Pliki programistyczne dla kmuda
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
